@@ -20,7 +20,7 @@ table 指定用户表
 通过 `Auth::check()` 就可以判断用户是否登陆状态，如果不是的话，直接重定向到 /login 这个url，为什么用`Redirect::guest()`而不用`Redirect::to()`呢，通过api手册可以查到：
 `Redirect::guest()` 在重定向时会将当前url保存到session中，这样可以在登陆以后，使用`Redirect::intended()`方法跳转到之前的页面继续业务。
 跳转到/login这个页面，当然得实现写好路由，可以指向某个控制器方法，详细的就不提了，假设login表单提交处理方法大致如下：
-> 
+```python
 public function postLogin()
 {
     if (Auth::attempt(array('email' => $email, 'password' => $password)))
@@ -28,6 +28,7 @@ public function postLogin()
         return Redirect::intended('/');
     }
 }
+```
 
 `Auth::attempt()`方法可以用来验证用户提交的登陆信息是否和user表里的匹配，在例子中，password这个字段是固定的，你在user表中也应当有对应的字段，并且宽度至少60，切记不是MD5。而email字段就随便了，可能你是使用username作为唯一标识符的，这个因项目而异吧，这里就随便以 email 作为登陆账户名了，数据库中也有相应的字段。
 可能有人会比较难以理解，其实只要换个角度，Auth只是帮我们实现了本来需要自己写的验证逻辑，还记得一开始配置的参数中有model和table，Auth就是根据这个自动帮我们查询，如果匹配成功会自动帮我们写入session，这样下次`Auth::check()`的时候就通过了。
@@ -36,3 +37,4 @@ public function postLogin()
 还可以继续优化，比如我们不应当在`BaseController`中进行`Auth::check`,我们可以利用`Route::filter`，在请求之前就进行验证，这方面可以参考手册中Route的相关章节。
 
 Auth还有一些其他的方法，比如 `Auth::basic()` 可以实现`http basic`认证，详细的可以参考手册 "身份验证" 章节，以及相关api，本文只是描述下大致的验证流程，不会深究了
+好的
