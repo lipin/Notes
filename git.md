@@ -7,6 +7,16 @@
 git log --pretty=oneline filename // 一行显示
 git show xxxx // 查看某次修改
 ```
+#### 删除远程分支
+```python
+git push orgin :remote_name
+```
+#### 恢复（删除）本地改动文件/新增文件夹
+```python
+git clean -d
+git clean -df 
+```
+
 #### 创建分支
 ```python
 git branch develop // 只创建分支
