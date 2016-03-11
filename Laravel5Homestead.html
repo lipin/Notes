@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+	<link rel="pingback" href="http://otaku.mogita.com/xmlrpc.php">
+
+	<title>Laravel 5 Homestead 日常工作流程 &#8211; otaku journals</title>
+<link rel="alternate" type="application/rss+xml" title="otaku journals &raquo; Feed" href="http://otaku.mogita.com/feed" />
+<link rel="alternate" type="application/rss+xml" title="otaku journals &raquo; 评论Feed" href="http://otaku.mogita.com/comments/feed" />
+<link rel="alternate" type="application/rss+xml" title="otaku journals &raquo; Laravel 5 Homestead 日常工作流程评论Feed" href="http://otaku.mogita.com/2015/11/56.otaku/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/otaku.mogita.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.4.2"}};
+			!function(a,b,c){function d(a){var c,d=b.createElement("canvas"),e=d.getContext&&d.getContext("2d"),f=String.fromCharCode;return e&&e.fillText?(e.textBaseline="top",e.font="600 32px Arial","flag"===a?(e.fillText(f(55356,56806,55356,56826),0,0),d.toDataURL().length>3e3):"diversity"===a?(e.fillText(f(55356,57221),0,0),c=e.getImageData(16,16,1,1).data.toString(),e.fillText(f(55356,57221,55356,57343),0,0),c!==e.getImageData(16,16,1,1).data.toString()):("simple"===a?e.fillText(f(55357,56835),0,0):e.fillText(f(55356,57135),0,0),0!==e.getImageData(16,16,1,1).data[0])):!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g;c.supports={simple:d("simple"),flag:d("flag"),unicode8:d("unicode8"),diversity:d("diversity")},c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.simple&&c.supports.flag&&c.supports.unicode8&&c.supports.diversity||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='prism-css'  href='http://otaku.mogita.com/wp-content/plugins/easy-prism-syntax-highlighter/css/prism.css?ver=1.0.2' type='text/css' media='all' />
+<link rel='stylesheet' id='hipwords-bootstrap-css'  href='http://otaku.mogita.com/wp-content/themes/hipwords/css/bootstrap.min.css?ver=3.2.2' type='text/css' media='all' />
+<link rel='stylesheet' id='hipwords-style-css'  href='http://otaku.mogita.com/wp-content/themes/hipwords/style.css?ver=4.4.2' type='text/css' media='all' />
+<link rel='stylesheet' id='google-fonts-css'  href='//fonts.useso.com/css?family=Open+Sans:400,800,700,300,600' type='text/css' media='all' />
+<script type='text/javascript' src='http://otaku.mogita.com/wp-includes/js/jquery/jquery.js?ver=1.11.3'></script>
+<script type='text/javascript' src='http://otaku.mogita.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.2.1'></script>
+<script type='text/javascript' src='http://otaku.mogita.com/wp-content/plugins/easy-prism-syntax-highlighter/js/prism.js?ver=1.0.2'></script>
+<link rel='https://api.w.org/' href='http://otaku.mogita.com/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://otaku.mogita.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://otaku.mogita.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='解决 PDF 复制文字重复的问题' href='http://otaku.mogita.com/2015/11/48.otaku' />
+<link rel='next' title='Nginx + CodeIgniter 搭建多版本 RESTful 服务' href='http://otaku.mogita.com/2016/01/101.otaku' />
+<meta name="generator" content="WordPress 4.4.2" />
+<link rel="canonical" href="http://otaku.mogita.com/2015/11/56.otaku" />
+<link rel='shortlink' href='http://otaku.mogita.com/?p=56' />
+<link rel="alternate" type="application/json+oembed" href="http://otaku.mogita.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fotaku.mogita.com%2F2015%2F11%2F56.otaku" />
+<link rel="alternate" type="text/xml+oembed" href="http://otaku.mogita.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fotaku.mogita.com%2F2015%2F11%2F56.otaku&#038;format=xml" />
+<style type="text/css" id="hipword-header-css">
+		.header-top {
+		background: url(http://otaku.mogita.com/wp-content/themes/hipwords/img/header-top3.jpg);
+		background-position: 50% 0;
+		background-repeat: no-repeat;
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		background-size: cover;
+		-o-background-size: cover;
+	}?>
+	</style>
+</head>
+<body class="single single-post postid-56 single-format-standard" data-target=".navbar-fixed-top">
+<div class="header-top">
+	<div class="overlay">
+		<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+		<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+			<div class="container-fluid">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="http://otaku.mogita.com/">
+						otaku journals					</a>
+				</div>
+				<div id="bs-example-navbar-collapse-1" class="collapse navbar-collapse navbar-right navbar-ex1-collapse"><ul id="menu-%e8%8f%9c%e5%8d%951" class="nav navbar-nav"><li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71"><a title="关于" href="http://otaku.mogita.com/about">关于</a></li>
+</ul></div>			</div>
+		</nav>
+		<!-- #site-navigation -->
+		<header id="masthead" class="site-header container" role="banner">
+			<div class="site-branding">
+				<div class="col-md-7">
+					
+					
+					<h1 class="entry-title site-title">Laravel 5 Homestead 日常工作流程</h1>										<div class="entry-meta">
+						星期一, 十一月 23rd, 2015						<a href="http://otaku.mogita.com/category/phplanguage" rel="category tag">PHP</a>					</div><!-- .entry-meta -->
+										
+									</div>
+				<div class="col-md-4 col-md-offset-1">
+					<h1 class="widget-title">分类目录</h1>		<ul>
+	<li class="cat-item cat-item-5"><a href="http://otaku.mogita.com/category/os-x" >OS X</a> (2)
+</li>
+	<li class="cat-item cat-item-2"><a href="http://otaku.mogita.com/category/phplanguage" >PHP</a> (4)
+</li>
+	<li class="cat-item cat-item-6"><a href="http://otaku.mogita.com/category/python" >Python</a> (1)
+</li>
+		</ul>
+				</div>
+			</div><!-- .site-branding -->
+		</header><!-- #masthead -->
+	</div>
+</div>
+<div id="page" class="container">
+	<div class="col-md-7">	<div id="primary" class="content-area">
+		<main id="main" class="site-main" role="main">
+					<article id="post-56" class="post-56 post type-post status-publish format-standard hentry category-phplanguage tag-homestead tag-laravel">
+<div class="entry-content">
+	<p>
+			</p>
+	<blockquote><p>本文节选自 Chuck Heintzelman 的《Laravel 5.1 Beauty》，原文地址 <a href="http://laravelcoding.com/blog/laravel-5-beauty-homestead-and-the-laravel-installer">http://laravelcoding.com/blog/laravel-5-beauty-homestead-and-the-laravel-installer</a></p>
+<p>译者：mogita</p></blockquote>
+<p><strong>题注：本文是教程的第三步，并假设你已安装好全部所需软件。</strong></p>
+<p>本章将探索两种 composer 工具：homestead 和 laravel。接下来讲解一种典型的日常工作流程，通过 6 个步骤，来建立一个新的 Laravel 5.1 工程。</p>
+<h1>本文目录</h1>
+<ul>
+<li><a href="#56-homestead-tools">Homestead 工具</a></li>
+<li><a href="#56-homestead-overview">常用 Homestead 命令概览</a></li>
+<li><a href="#56-homestead-yaml">了解 Homestead.yaml</a></li>
+<li><a href="#56-homestead-software">向 Homestead 虚拟机添加软件</a></li>
+<li><a href="#56-daily-workflow">日常工作流程</a></li>
+<li><a href="#56-6-steps">六个步骤开启一个全新 Laravel 5.1 工程</a>
+<ul>
+<li><a href="#56-step-1">第一步 &#8211; 创建应用骨架</a></li>
+<li><a href="#56-step-2">第二步 &#8211; 配置 Web 服务器</a></li>
+<li><a href="#56-step-3">第三步 &#8211; 添加主机记录到 Hosts 文件</a></li>
+<li><a href="#56-step-4">第四步 &#8211; NPM 本地安装</a></li>
+<li><a href="#56-step-5">第五步 &#8211; 创建应用的数据库</a></li>
+<li><a href="#56-step-6">第六步 &#8211; 在浏览器中测试</a></li>
+</ul>
+</li>
+<li><a href="#56-homestead-tips">其他 Homestead 小贴士</a></li>
+<li><a href="#56-recap">本文回顾</a></li>
+</ul>
+<h1><a id="56-homestead-tools"></a>Homestead 工具</h1>
+<blockquote><p><strong>什么是控制台</strong></p>
+<p>每当你需要在控制台里进行一些操作时，你需要搞清楚是哪种控制台。</p>
+<p><strong>Homestead 控制台</strong>是指通过 SSH 连接到 Homestead 虚拟机。在 Windows 系统中，可以是通过 PuTTY 建立的连接（详情请阅读在 Windows 系统建立虚拟机的章节）。在其他操作系统中，在终端执行 <code class="language-markup">homestead ssh</code> 命令就可以进行连接了。在本文中，凡是跟在 <code class="language-markup">$</code> 后边的命令，都是在 Homestead 终端执行的。</p>
+<p><strong>OS 控制台</strong>是指 Windows 的命令行提示符或者其他你正在使用的终端软件。（本文中 <code class="language-markup">%</code> 符号后边的命令都是在 OS 控制台中执行的）</p></blockquote>
+<p>在宿主机的控制台中，我们输入 homestead 命令（不带任何参数），就可以轻松查看所有可用的 homestead 参数和命令。</p>
+<h3>Homestead 命令</h3>
+<pre class="language-language=“bash""><code class="language-language=“bash"">% homestead
+Laravel Homestead version 2.0.9
+
+Usage:
+[options] command [arguments]
+
+Options:
+--help -h Display this help message.
+--quiet -q Do not output any message.
+--verbose -v|vv|vvv Increase the verbosity of messages: 1 for normal \
+output, 2 for more verbose output and 3 for debug.
+--version -V Display this application version.
+--ansi Force ANSI output.
+--no-ansi Disable ANSI output.
+--no-interaction -n Do not ask any interactive question.
+
+Available commands:
+destroy Destroy the Homestead machine
+edit Edit the Homestead.yaml file
+halt Halt the Homestead machine
+help Displays help for a command
+init Create a stub Homestead.yaml file
+list Lists commands
+provision Re-provisions the Homestead machine
+resume Resume the suspended Homestead machine
+run Run commands through the Homestead machine via SSH
+ssh Login to the Homestead machine via SSH
+status Get the status of the Homestead machine
+suspend Suspend the Homestead machine
+up Start the Homestead machine
+update Update the Homestead machine image</code></pre>
+<p>我们每天接触最多的一个命令是 <code class="language-markup">homestead up</code>，用来启动 Homestead 虚拟机。</p>
+<h1><a id="56-homestead-overview"></a>常用 Homestead 命令概览</h1>
+<p>这里是一系列常用的 Homestead 命令。</p>
+<p><strong>homestead up<br />
+</strong>启动 Homestead 虚拟机，或者说「点亮」虚拟机的电源。如果你使用了 provision 选项（<code class="language-markup">homestead up --provision</code>），则 provision 配置将对所有新增加的站点都生效。</p>
+<p><strong>homestead halt<br />
+</strong>停止 Homestead 虚拟机，或者说「关闭」虚拟机的电源。</p>
+<p><strong>homestead suspend<br />
+</strong>暂停 Homestead 虚拟机，可以理解为休眠。</p>
+<p><strong>homestead resume<br />
+</strong>将暂停的 Homestead 虚拟机恢复运行。</p>
+<p><strong>homestead edit<br />
+</strong>编辑 Homestead.yaml 文件。这个命令将使用当前与 YAML 文件格式关联的编辑器软件。</p>
+<p><strong>homestead status<br />
+</strong>查看 Homestead 虚拟机的当前状态</p>
+<h1><a id="56-homestead-yaml"></a>了解 Homestead.yaml</h1>
+<p>Laravel Homestead 的配置都在 Homestead.yaml 文件中。该文件位于你的宿主系统 home 目录中的 <code class="language-markup">.homestead</code> 目录下。</p>
+<p>查看该文件的内容，大致如下。</p>
+<h3>Homestead.yaml 的内容</h3>
+<pre class="language-markup"><code class="language-markup">---
+
+ip: "192.168.10.10"
+memory: 2048
+cpus: 1
+
+authorize: ~/.ssh/id_rsa.pub
+
+keys:
+- ~/.ssh/id_rsa
+
+folders:
+- map: ~/Code
+to: /home/vagrant/Code
+
+sites:
+- map: homestead.app
+to: /home/vagrant/Code/Laravel/public
+
+databases:
+- homestead
+
+variables:
+- key: APP_ENV
+value: local</code></pre>
+<p>下面逐一解释各个配置部分：</p>
+<p><strong>ip<br />
+</strong>访问虚拟机所用的内网 IP。</p>
+<p><strong>memory<br />
+</strong>虚拟机的可用内存。</p>
+<p><strong>cpus<br />
+</strong>虚拟机的可用 CPU 数目。</p>
+<p><strong>authorize<br />
+</strong>此项应该指向你的 SSH 公钥。</p>
+<p><strong>keys<br />
+</strong>你的 SSH 私钥。</p>
+<p><strong>folders<br />
+</strong>共享文件夹，即宿主机中的文件夹和对应在虚拟机中的文件夹。在 Windows 系统中，<code class="language-markup">~/Code</code> 目录大致上等同于 <code class="language-markup">C:\Users\YOU\Code</code> 文件夹。在 OS X 中为 <code class="language-markup">/Users/YOU/Code</code>。在 Linux 中通常是 <code class="language-markup">/home/YOU/Code</code>。当你在宿主机的这个文件夹里进行文件操作时，虚拟机中的对应目录中也会立即发生改变。</p>
+<p><strong>sites<br />
+</strong>站点列表（各个域名指向的路径），每当 Homestead 虚拟机启动时将生效。</p>
+<p><strong>databases<br />
+</strong>Homestead 应该能自动创建的数据库列表。</p>
+<p><strong>variables<br />
+</strong>将在 Homestead 环境中生效的变量。</p>
+<blockquote><p><strong>配置小技巧</strong></p>
+<p>我一般只对一处进行修改，将数据库下边的 homestead 改名为 xhomestead。这样做的目的在于，如果我忘记为新应用创建数据库，就会报错。否则，会使用默认的 homestead 数据库，我却无法察觉。</p></blockquote>
+<p>那么现在，除了 <strong>database</strong> 之外，我们不修改任何配置。</p>
+<p><strong>Homestead 虚拟机详细配置</strong></p>
+<table style="height: 270px;" width="309">
+<tbody>
+<tr>
+<td><strong>字段</strong></td>
+<td><strong>值</strong></td>
+</tr>
+<tr>
+<td>Hostname</td>
+<td>homestead</td>
+</tr>
+<tr>
+<td>IP Address</td>
+<td>192.168.10.10</td>
+</tr>
+<tr>
+<td>Username</td>
+<td>vagrant</td>
+</tr>
+<tr>
+<td>SU Password</td>
+<td>vagrant</td>
+</tr>
+<tr>
+<td>Database Host</td>
+<td>127.0.0.1</td>
+</tr>
+<tr>
+<td>Database Port</td>
+<td>33060</td>
+</tr>
+<tr>
+<td>Database Username</td>
+<td>homestead</td>
+</tr>
+<tr>
+<td>Database Password</td>
+<td>secret</td>
+</tr>
+</tbody>
+</table>
+<h1><a id="56-homestead-software"></a>向 Homestead 虚拟机添加软件</h1>
+<p>若你需要在 Homestead 虚拟机中安装新的软件，可以使用 Ubuntu 的 <code class="language-markup">apt-get</code> 命令。</p>
+<p>这是非常简便的两个步骤：</p>
+<ul>
+<li>升级 Ubuntu</li>
+<li>用 apt-get 安装</li>
+</ul>
+<p>下边举例说明，当我们需要 unzip 这个软件时，应该怎样进行安装。</p>
+<h3>首先，升级 Ubuntu</h3>
+<p><strong>将 Ubuntu 软件升级到最新</strong></p>
+<pre class="language-markup"><code class="language-markup">vagrant@homestead:~$ sudo apt-get update
+
+vagrant@homestead:~$ sudo apt-get upgrade</code></pre>
+<p>选择「Y」来继续安装。如果安装过程中出现什么提示，尽量选择已有的或默认配置。</p>
+<p>升级完 Homestead 虚拟机里的 Ubuntu 系统之后，就可以安装 unzip 了。</p>
+<h3>下面，通过 apt-get 安装 unzip</h3>
+<p><strong>在 Homestead 虚拟机中安装 unzip</strong></p>
+<pre class="language-markup"><code class="language-markup">vagrant@homestead:~$ sudo apt-get install unzip</code></pre>
+<h1><a id="56-daily-workflow"></a>日常工作流程</h1>
+<p>通常，使用 homestead 处理日常工作的流程主要分成三个步骤：</p>
+<p><strong>第一步 &#8211; homestead up</strong>：启动 Homestead 虚拟机开始一天的工作。</p>
+<p><strong>第二步 &#8211; homestead ssh </strong>或<strong> PuTTY</strong>：通过 SSH 连接到 Homestead 虚拟机，直接访问文件，并执行 artisan 命令。</p>
+<p><strong>第三步 &#8211; 编写优美的代码</strong>：在宿主系统中，打开你最爱的编辑器，开始写代码。</p>
+<p><strong>可选的第四步 &#8211; homestead halt</strong>：一天的工作结束后，你可以选择关闭 Homestead 虚拟机的电源。</p>
+<h1><a id="56-6-steps"></a>六个步骤开启一个全新 Laravel 5.1 工程</h1>
+<p>每次建立新的 Laravel 5.1 应用时，你都可以跟随下边的六大步骤来进行。</p>
+<p>比方说，我们要创建一个名叫 test.app 的工程，项目文件夹的名字就叫 test。</p>
+<h4><a id="56-step-1"></a>第一步 &#8211; 创建应用骨架</h4>
+<p>通过 Laravel Installer（前置章节中安装好的 <code class="language-markup">laravel</code> 命令），可以迅速创建一个工程骨架。</p>
+<p><strong>创建一个新的应用骨架</strong></p>
+<pre class="language-markup"><code class="language-markup">~/Code % laravel new test
+Crafting application...
+Generating optimized class loader
+Compiling common classes
+Application key [rzUhyDksVxzTXFjzFYiOWToqpunI2m6X] set successfully.
+Application ready! Build something amazing.</code></pre>
+<h4><a id="56-step-2"></a>第二步 &#8211; 配置 Web 服务器</h4>
+<p>安装好应用骨架后，就可以在 homestead 环境中启动 Nginx 服务器，来为应用的 public 目录建立网页服务了。</p>
+<p>Homestead 环境中的 <code class="language-markup">serve</code> 命令可以轻松完成这一任务。</p>
+<p><strong>在 Homestead 中启动一个新的虚拟主机</strong></p>
+<pre class="language-markup"><code class="language-markup">~/Code$ serve test.app ~/Code/test/public
+dos2unix: converting file /vagrant/scripts/serve.sh to Unix format ...
+* Restarting nginx nginx                                    [ OK ]
+php5-fpm stop/waiting
+php5-fpm start/running, process 2169</code></pre>
+<p>这条命令会在 <code class="language-markup">/etc/nginx/sites-available</code> 目录下，为 <strong>test.app</strong> 生成一个新的配置文件，并在 <code class="language-markup">/etc/nginx/sites-enabled</code> 目录下生成一个指向该配置文件的软连接。</p>
+<p>即使虚拟机重启，该配置也会依然存在。</p>
+<blockquote><p><strong>为什么不直接编辑 Homestead.yaml</strong></p>
+<p>你问得对。另外一种建立 test.app 服务器的方式是 <code class="language-markup">homestead edit</code> 命令，并在 <em>sites:</em> 下边输入新的站点信息。但 serve 命令更简单，并且无需重新配置并启动 Homestead 虚拟机。</p>
+<p>然而，有时你可能需要经常对某个应用进行配置，你完全可以去编辑 Homestead.yaml 文件。</p></blockquote>
+<h4><a id="56-step-3"></a>第三步 &#8211; 添加主机记录到 Hosts 文件</h4>
+<p>截至目前，test.app 的域名还无法解析（没有任何 DNS 记录），必须向宿主系统的 hosts 文件添加一条记录。编辑 Linux 或 OS X 中的 <code class="language-markup">/etc/hosts</code> 文件。Windows 系统中，该文件位于 <code class="language-markup">C:\Windows\System32\drivers\etc\hosts</code>。将 <strong>test.app</strong> 这个域名指向 <code class="language-markup">Homestead.yaml</code> 文件中指定的 IP 地址即可。</p>
+<p>例如将下一行加入文件中。</p>
+<p><strong>Test.app 的 Host 记录</strong></p>
+<pre class="language-markup"><code class="language-markup">192.168.10.10  test.app</code></pre>
+<blockquote><p><strong>Windows 系统需要管理员权限来编辑 hosts 文件</strong></p>
+<p>在 Windows 中，你必须以管理员身份运行编辑器软件（例如写字板或 Sublime Text 等）。在 Linux 或 OS X 中则可以使用 <code class="language-markup">sudo</code> 命令。</p></blockquote>
+<p><strong>在 Linux 或 OS X 中编辑 hosts 文件</strong></p>
+<pre class="language-markup"><code class="language-markup">sudo nano /etc/hosts
+// or
+sudo vi /etc/hosts</code></pre>
+<h4><a id="56-step-4"></a>第四步 &#8211; NPM 本地安装</h4>
+<p>为了稍后可以使用 gulp，我们需要将所需的 npm 模块都在本地安装好。</p>
+<p><strong>如果你用不着 gulp，那么就跳过这一步吧。</strong></p>
+<p>在宿主系统的控制台中进入工程所在的目录，并执行以下命令。</p>
+<p><strong>NPM 本地安装</strong></p>
+<pre class="language-markup"><code class="language-markup">~% cd Code/test
+~/Code/test% npm install
+npm WARN package.json @ No repository field.
+
+v8flags@1.0.5 install /Users/chuck/Code/test/node_modules/gulp/\
+node_modules/v8flags
+&gt; node fetch.js
+
+flags for v8 3.14.5.9 cached.
+
+[snip]</code></pre>
+<p>这样，gulp 所需的所有依赖都会安装到工程目录中的 node_modules 文件夹了。</p>
+<h4><a id="56-step-5"></a>第五步 &#8211; 创建应用的数据库</h4>
+<p>如果应用需要数据库，进入 Homestead 虚拟机的 <strong>mysql</strong> 控制台就能轻松创建数据库了。</p>
+<p><strong>在 Homestead 虚拟机中创建数据库</strong></p>
+<pre class="language-markup"><code class="language-markup">$ mysql --user=homestead --password=secret
+mysql&gt; create database test;
+mysql&gt; exit;</code></pre>
+<p>数据库创建好之后，你需要在工程的根目录中找到 .env 文件，编辑其中的 DB_NAME 字段为适合的值。</p>
+<p>修改 .env 中的 DB_NAME</p>
+<pre class="language-markup"><code class="language-markup">// Change the following line
+DB_DATABASE=homestead
+
+// To the correct value
+DB_DATABASE=test</code></pre>
+<p>就是这样简单。现在，你可以对数据表进行迁移和创建等操作了。之后的章节将进一步介绍这些操作。</p>
+<h4><a id="56-step-6"></a>第六步 &#8211; 在浏览器中测试</h4>
+<p>打开浏览器，输入 <code class="language-markup">http://test.app</code>，你就能看到下面的画面了。</p>
+<p><strong>默认的 Laravel 5.1 首页</strong></p>
+<p><img class="alignnone size-full wp-image-88" src="http://otaku.mogita.com/wp-content/uploads/sites/11/2015/11/l5-welcome-page.jpg" alt="l5-welcome-page" width="1026" height="737" srcset="http://otaku.mogita.com/wp-content/uploads/sites/11/2015/11/l5-welcome-page-300x215.jpg 300w, http://otaku.mogita.com/wp-content/uploads/sites/11/2015/11/l5-welcome-page-1024x736.jpg 1024w, http://otaku.mogita.com/wp-content/uploads/sites/11/2015/11/l5-welcome-page.jpg 1026w" sizes="(max-width: 1026px) 100vw, 1026px" /></p>
+<p>如果你看到的不是这个画面，那么之前的步骤中或许有不正确的地方。</p>
+<h1><a id="56-homestead-tips"></a>其他 Homestead 小贴士</h1>
+<h4>请在宿主系统中编写代码</h4>
+<p>之前的章节我们提到了这一点，这里再强调一次。请把代码编辑工作都放在宿主系统中进行。共享文件夹使用起来非常便捷，你在宿主系统的工程文件夹中进行的任何更改都会立即呈现在 Homestead 虚拟机中。</p>
+<h4>使用 .homestead/aliases 文件</h4>
+<p>每当你需要使用 <code class="language-markup">homestead up --provision</code> 或 <code class="language-markup">homestead provision</code> 命令重新配置 Homestead 时，<code class="language-markup">.homestead/aliases</code> 文件都会更新 Homestead 虚拟机中的各个替身。</p>
+<p>所以通过这个文件，我们可以轻松添加新的替身、函数甚至其他环境变量。</p>
+<h4>保持 Homestead 虚拟机在最新状态</h4>
+<p>上文提到，只需两条命令就可以将 Homestead 虚拟机里的 Ubuntu 操作系统更新到最新状态。</p>
+<p><strong>保持 Ubuntu 最新</strong></p>
+<pre class="language-markup"><code class="language-markup">$ sudo apt-get update
+$ sudo apt-get upgrade</code></pre>
+<h1><a id="56-recap"></a>本文回顾</h1>
+<p>本章详细讲解了 homestead 和 laravel 命令，以及创建一个 Laravel 5.1 工程的简单六步。</p>
+<p>下一章，我们来了解关于测试的知识。</p>
+<p>&nbsp;<br />
+<hr />
+<pre class="language-text" style="background: #5f5f5f;">
+<code><strong>文章信息</strong></code>
+<code><strong>版权声明：</strong>自由转载-非商用-非衍生-保持署名<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" target="_blank" style="color: #F8F8F2;">（创意共享3.0许可证）</a></code>
+<code><strong>固定链接：</strong><a href="http://otaku.mogita.com/2015/11/56.otaku" style="color: #F8F8F2;">http://otaku.mogita.com/2015/11/56.otaku</a></code>
+</pre>
+	</div><!-- .entry-content -->
+<footer class="entry-footer">
+	<span class="cat-links">Posted in <a href="http://otaku.mogita.com/category/phplanguage" rel="category tag">PHP</a></span><span class="tags-links">Tagged <a href="http://otaku.mogita.com/tag/homestead" rel="tag">homestead</a>, <a href="http://otaku.mogita.com/tag/laravel" rel="tag">laravel</a></span></footer><!-- .entry-footer -->
+</article><!-- #post-## -->
+			
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">文章导航</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="http://otaku.mogita.com/2015/11/48.otaku" rel="prev">解决 PDF 复制文字重复的问题</a></div><div class="nav-next"><a href="http://otaku.mogita.com/2016/01/101.otaku" rel="next">Nginx + CodeIgniter 搭建多版本 RESTful 服务</a></div></div>
+	</nav>			
+<div id="comments" class="comments-area">
+
+	
+	
+	
+					<div id="respond" class="comment-respond">
+			<h3 id="reply-title" class="comment-reply-title">发表评论 <small><a rel="nofollow" id="cancel-comment-reply-link" href="/2015/11/56.otaku#respond" style="display:none;">取消回复</a></small></h3>				<form action="http://otaku.mogita.com/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate>
+					<p class="comment-notes"><span id="email-notes">电子邮件地址不会被公开。</span> 必填项已用<span class="required">*</span>标注</p><p class="comment-form-comment"><label for="comment">评论</label> <textarea id="comment" name="comment" cols="45" rows="8"  aria-required="true" required="required"></textarea></p><p class="comment-form-author"><label for="author">姓名 <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" aria-required='true' required='required' /></p>
+<p class="comment-form-email"><label for="email">电子邮件 <span class="required">*</span></label> <input id="email" name="email" type="email" value="" size="30" aria-describedby="email-notes" aria-required='true' required='required' /></p>
+<p class="comment-form-url"><label for="url">站点</label> <input id="url" name="url" type="url" value="" size="30" /></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="发表评论" /> <input type='hidden' name='comment_post_ID' value='56' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p>				</form>
+					</div><!-- #respond -->
+		
+</div><!-- #comments -->
+				</main><!-- #main -->
+	</div><!-- #primary -->
+
+</div>
+
+<div class="col-md-4  col-md-offset-1">
+<div id="secondary" class="widget-area" role="complementary">
+	<aside id="text-2" class="widget widget_text">			<div class="textwidget"><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?7d83b24817e8db512270b5e16023ac59";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div>
+		</aside><aside id="search-3" class="widget widget_search"><form role="search" method="get" class="search-form" action="http://otaku.mogita.com/">
+				<label>
+					<span class="screen-reader-text">搜索：</span>
+					<input type="search" class="search-field" placeholder="搜索&hellip;" value="" name="s" title="搜索：" />
+				</label>
+				<input type="submit" class="search-submit" value="搜索" />
+			</form></aside></div><!-- #secondary -->
+</div>
+
+</div>
+<!-- #content -->
+</div>
+</div>
+<div class="footer container">
+
+	<div class="col-md-4">
+					<div class="textwidget"></div>
+			</div>
+
+	<div class="col-md-4">
+					<div class="textwidget"></div>
+			</div>
+
+	<div class="col-md-4">
+					<div class="textwidget"></div>
+			</div>
+
+</div> <!-- end container -->
+
+<footer id="colophon" class="container text-center" role="contentinfo">
+	<a href="http://wordpress.org/">Powered by <b>WordPress</b></a>
+	<span class="sep"> | </span>
+	<a href="http://forbetterweb.com/" title="forbetterweb.com">
+		Theme: <b>HipWords</b> by ForBetterWeb.com.	</a>
+</footer><!-- #colophon -->
+<script type='text/javascript' src='http://otaku.mogita.com/wp-content/themes/hipwords/js/bootstrap.min.js?ver=1.0'></script>
+<script type='text/javascript' src='http://otaku.mogita.com/wp-content/themes/hipwords/js/navigation.js?ver=20120206'></script>
+<script type='text/javascript' src='http://otaku.mogita.com/wp-content/themes/hipwords/js/skip-link-focus-fix.js?ver=20130115'></script>
+<script type='text/javascript' src='http://otaku.mogita.com/wp-includes/js/comment-reply.min.js?ver=4.4.2'></script>
+<script type='text/javascript' src='http://otaku.mogita.com/wp-includes/js/wp-embed.min.js?ver=4.4.2'></script>
+</body>
+</html>
