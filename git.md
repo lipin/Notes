@@ -11,6 +11,19 @@ git show xxxx // 查看某次修改
 ```python
 git push orgin :remote_name
 ```
+#### 添加未加入版本库的文件
+```python
+git add -f file_path/file
+```
+#### 在本地删除远程已经删除的分支
+```python
+git fetch -p
+等同于下面的命令
+git fetch --prune origin 
+git fetch -p
+```
+在本地删除远程已经删除的分支。
+
 #### 恢复（删除）本地改动文件/新增文件夹
 ```python
 git clean -d
