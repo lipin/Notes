@@ -1,0 +1,4 @@
+
+#修改mirror
+docker-machine ssh default "echo 'EXTRA_ARGS=\"--registry-mirror=https://99kelzic.mirror.aliyuncs.com\"' | sudo tee -a /var/lib/boot2docker/profile"
+docker-machine restart default 
